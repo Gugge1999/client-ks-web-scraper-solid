@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import plugin from "eslint-plugin-solid";
 import solid from "eslint-plugin-solid/configs/typescript.js";
 import tseslint from "typescript-eslint";
 
@@ -9,6 +10,7 @@ export default tseslint.config(
   js.configs.recommended,
   tseslint.configs.eslintRecommended,
   ...tseslint.configs.recommended,
+  plugin.configs["flat/typescript"],
   {
     files: ["**/*.{ts,tsx}"],
     ...solid,
