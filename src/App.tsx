@@ -1,6 +1,5 @@
 import { Button } from "@suid/material";
 import type { Component } from "solid-js";
-
 import styles from "./App.module.scss";
 import logo from "./logo.svg";
 
