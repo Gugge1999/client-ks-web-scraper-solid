@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "lint": "npx eslint eslint.config.js"
+    "lint": "npx eslint src/ eslint.config.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

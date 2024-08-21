@@ -1,21 +1,27 @@
 import js from "@eslint/js";
-import * as tsParser from "@typescript-eslint/parser";
 import solid from "eslint-plugin-solid/configs/typescript.js";
-import * as tseslint from "typescript-eslint";
+import tseslint from "typescript-eslint";
 
-export default [
+export default tseslint.config(
+  {
+    ignores: ["dist", "node_modules"],
+  },
   js.configs.recommended,
+  tseslint.configs.eslintRecommended,
   ...tseslint.configs.recommended,
-  ...tseslint.configs.stylistic,
   {
     files: ["**/*.{ts,tsx}"],
     ...solid,
     languageOptions: {
-      parser: tsParser,
+      parser: tseslint.parser,
       parserOptions: {
-        project: "tsconfig.json",
+        project: "./tsconfig.json",
       },
     },
-  },
-];
+    rules: {
+      eqeqeq: "error",
+      curly: ["error", "all"],
+    },
+  }
+);
 
