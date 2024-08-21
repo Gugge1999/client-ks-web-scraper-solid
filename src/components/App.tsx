@@ -1,7 +1,7 @@
 import { Button } from "@suid/material";
 import type { Component } from "solid-js";
+import logo from "../logo.svg";
 import styles from "./App.module.scss";
-import logo from "./logo.svg";
 
 const App: Component = () => {
   return (

@@ -1,7 +1,7 @@
 /* @refresh reload */
 import { createTheme, ThemeProvider } from "@suid/material";
 import { render } from "solid-js/web";
-import App from "./App";
+import App from "./components/App";
 import "./index.scss";
 
 const root = document.getElementById("root");
