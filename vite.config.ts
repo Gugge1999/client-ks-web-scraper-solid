@@ -12,9 +12,11 @@ export default defineConfig({
     solidPlugin(),
   ],
   server: {
-    port: 3000,
+    port: 4200,
+    host: "192.168.1.2",
   },
   build: {
     target: "esnext",
+    sourcemap: true, // TODO: Radera?
   },
 });
