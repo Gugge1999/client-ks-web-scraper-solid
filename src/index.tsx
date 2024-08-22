@@ -1,7 +1,11 @@
 /* @refresh reload */
 import { createTheme, ThemeProvider } from "@suid/material";
 import { render } from "solid-js/web";
-import App from "./components/App";
+
+import Card from "./components/card/Card";
+import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
+
 import "./index.scss";
 
 const root = document.getElementById("root");
@@ -18,18 +22,20 @@ const darkTheme = createTheme({
   },
 });
 
-const lightTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: { main: "#009688" },
-    secondary: { main: "#90a4ae" },
-  },
-});
+// const lightTheme = createTheme({
+//   palette: {
+//     mode: "dark",
+//     primary: { main: "#009688" },
+//     secondary: { main: "#90a4ae" },
+//   },
+// });
 
 render(() => {
   return (
     <ThemeProvider theme={darkTheme}>
-      <App />
+      <Header />
+      <Card />
+      <Footer />
     </ThemeProvider>
   );
 }, root!);
