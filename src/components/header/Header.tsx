@@ -11,7 +11,6 @@ const Header: Component = () => {
   const [loading, setLoading] = createSignal(true);
   const [open, setOpen] = createSignal(false);
   const [apiStatusError, setApiStatusError] = createSignal<string | null>(null);
-  const [apiStatusErrorASD, asdSetApiStatusError] = createSignal<string | null>(null);
 
   setInterval(
     (function apiStatusInterval() {
@@ -24,10 +23,6 @@ const Header: Component = () => {
   /** TODO: Det bör gå att skapa en generic http request funktion som returnerar {result: T, error: string | null} */
   async function handleFetch(): Promise<void> {
     setLoading(true);
-
-    asdSetApiStatusError("asdasd");
-
-    console.log("asd", apiStatusErrorASD());
 
     try {
       const res = await request.get<ApiStatus>(`${apiBaseUrl}/api-status`);
