@@ -1,7 +1,6 @@
 import Button from "@suid/material/Button";
 import request from "axios";
 import { Component, createSignal } from "solid-js";
-
 import apiBaseUrl from "../../env/env";
 import { ApiStatus } from "../../models/api-status.model";
 import { initialApiStatus } from "../../models/constants";
@@ -12,41 +11,55 @@ const Header: Component = () => {
   const [loading, setLoading] = createSignal(true);
   const [open, setOpen] = createSignal(false);
   const [apiStatusError, setApiStatusError] = createSignal<string | null>(null);
+  const [apiStatusErrorASD, asdSetApiStatusError] = createSignal<string | null>(null);
 
   setInterval(
     (function apiStatusInterval() {
       handleFetch();
       return apiStatusInterval;
     })(),
-    30_000
+    30_000,
   );
 
-  async function handleFetch() {
+  /** TODO: Det bör gå att skapa en generic http request funktion som returnerar {result: T, error: string | null} */
+  async function handleFetch(): Promise<void> {
     setLoading(true);
+
+    asdSetApiStatusError("asdasd");
+
+    console.log("asd", apiStatusErrorASD());
 
     try {
       const res = await request.get<ApiStatus>(`${apiBaseUrl}/api-status`);
       setApiActive(res.data);
       setApiStatusError(null);
     } catch (err) {
-      if (request.isAxiosError(err) && err.response) {
-        // Is this the correct way?
+      if (request.isAxiosError(err)) {
         setApiActive(initialApiStatus);
-        setApiStatusError(err.response.data.errorMessage);
+
+        if (err.response) {
+          // Är det här rätt?
+          setApiStatusError(err.response.data.errorMessage);
+          return;
+        }
+
+        if (err.message) {
+          setApiStatusError(err.message);
+        }
       }
     } finally {
       setLoading(false);
     }
   }
 
-  const handleClickOpen = () => {
-    handleFetch();
+  async function handleClickOpen() {
     setOpen(true);
-  };
+    await handleFetch();
+  }
 
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
-  };
+  }
 
   return (
     <div>

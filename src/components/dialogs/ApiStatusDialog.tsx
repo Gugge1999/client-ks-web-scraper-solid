@@ -1,7 +1,6 @@
 import { Dialog, DialogContent, DialogTitle } from "@suid/material";
-import { Component, Show } from "solid-js";
-
 import { ApiStatus } from "models/api-status.model";
+import { Show } from "solid-js";
 
 interface SimpleDialogProps {
   apiStatus: ApiStatus;
@@ -11,8 +10,10 @@ interface SimpleDialogProps {
   onClose: () => void;
 }
 
-const ApiStatusDialog: Component<SimpleDialogProps> = (props: SimpleDialogProps) => {
-  const handleClose = () => props.onClose();
+const ApiStatusDialog = (props: SimpleDialogProps) => {
+  function handleClose() {
+    props.onClose();
+  }
 
   return (
     <Dialog onClose={handleClose} open={props.open}>
@@ -38,7 +39,7 @@ const ApiStatusDialog: Component<SimpleDialogProps> = (props: SimpleDialogProps)
           <h4>Laddar status för API......</h4>
         </Show>
 
-        <Show when={props.apiStatusError}>
+        <Show when={props.apiStatusError && !props.loading}>
           <h4>Error. Nåt gick fel:</h4>
           <p>{props.apiStatusError}</p>
         </Show>
